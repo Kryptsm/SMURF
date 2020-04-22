@@ -32,7 +32,7 @@ export default function compileAndRun(grammar, script, printFunction) {
   let ast = grammar.parse(script,{AST: AST})
   let interpreter = new Interpreter()
   console.log("ast", ast)
-  let result = interpreter.visit(ast)
+  let result = Math.round(interpreter.visit(ast))
   console.log("Result", result)
-  return Math.round(result)// ... the value returned by executing the SMURF script
+  return result// ... the value returned by executing the SMURF script
 }
