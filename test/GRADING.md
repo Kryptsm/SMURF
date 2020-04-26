@@ -3,14 +3,22 @@
 | Part           | Comments    | Points |
 |----------------|-------------|--------|
 | provided tests | All passed  |     65 |
-| extras         | 3 failures  |      4 |
+| extras         | 3 failures  |      2 |
 | Coding         |             |     25 |
-| **TOTAL**      |             |     94 |
+| **TOTAL**      |             |     92 |
+
+
+Nice job! :)
 
 Failures in my torture tests:
 
-- the interpreter blows up given `if 0 { 99 }`. It should either raise
-  an error or return 0.
+- failed to parse:  let a = fn () { 99 }
+                    let b = fn(){a()+1}
+                    a() + b()
+
+- failed to parse:  let a = fn(){fn(){123}}
+                    let b = a()
+                    b()
 
 - your binding code doesn't check for duplicate definitions of a
   variable (two `let`s for the same variable)
