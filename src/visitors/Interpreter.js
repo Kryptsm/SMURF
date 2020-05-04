@@ -52,18 +52,18 @@ export default class Interpreter {
     if(args.length != thunk.formals.length)
         throw new Error(`Invalid parameter list for function`)
     for(let i = 0; i < args.length; i = i + 1){
-      try{
+      // try{
         var val = args[i].accept(this)
-      }
-      catch{
-        val = this.binding.getVariableValue(args[i])
-      }
+      // }
+      // catch{
+      //   val = this.binding.getVariableValue(args[i])
+      // }
         binding.setVariable(thunk.formals[i], val)
     }
     let temp = this.binding
     this.binding = binding
     let ret = thunk.code.accept(this)
-    thunk.binding = this.binding
+    // thunk.binding = this.binding
     this.binding = temp
     return ret
   }

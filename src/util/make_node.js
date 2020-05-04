@@ -1,10 +1,15 @@
-export class <<node name>> {
-    constructor(<<n1, n2 .. >>){
-        //this.<<n1>> = <<n1>>
-        //this.<<n2>> = <<n2>>
+export function makeNode(nodeName, ...attributes) {
+  const count = attributes.length;
+  const constructor = function (...args) {
+    for (let i = 0; i < count; i++) {
+      this[attributes[i]] = args[i];
     }
+  };
 
-    accept(visitor){
-        return visitor.<<NodeName>>(this)
-    }
+  Object.defineProperty(constructor, 'name', { value: nodeName });
+
+  constructor.prototype.accept = function (visitor) {
+    return visitor[this.constructor.name](this);
+  };
+  return constructor;
 }
